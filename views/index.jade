@@ -1,0 +1,48 @@
+extends layout
+
+block contents
+    #bg
+
+    #wrapper
+        .panel
+            h1 Igor Ramadas
+            .headline.
+                Born in Belo Horizonte (Brazil), adventured in London (UK), living in Berlin (Germany),
+                working at Zalando, addicted to music and making the most out of his 24 daily hours.
+                <br />
+                And a nice guy.
+
+        .panel
+            h2 Software
+            div.
+                Node.js, CoffeeScript, JavaScript, HTML5, CSS3, MongoDB, NoSQL, .NET, C#.
+                This list won't stop growing.
+            .links
+                a(href="https://github.com/igoramadas", title="My open source activity at GitHub") @ GitHub
+                a(href="https://www.codeplex.com/site/users/view/igoramadas", title="My open source activity at CodePlex") @ CodePlex
+                a(href="https://coderwall.com/igoramadas", title="My coding tips at Coderwall") @ Coderwall
+
+        .panel
+            h2 Music
+            div.
+                My current top artists are #{recentTopArtists}.
+            .links
+                a(href="http://www.last.fm/user/igoramadas", title"My music profile at Last.fm") @ Last.fm
+                a(href="https://soundcloud.com/igoramadas", title"My mixes and electronic music favorites at SoundCloud") @ SoundCloud
+
+        .panel
+            h2 Sports
+            div.
+                In the last 3 months I ran  #{recentRunning.workouts} times, totalling #{recentRunning.distance}km in
+                #{recentRunning.duration} and cycled #{recentCycling.workouts} times,
+                totaling #{recentCycling.distance}km in #{recentCycling.duration}.
+            .links
+                a(href="http://www.endomondo.com/profile/6630895", title="My workouts at Endomondo") @ Endomondo
+
+        .panel
+            h2 What else?
+            div.
+                Occasionally I blog.
+            .links
+                a(href="", title="") @ The Unhackable Me
+                a(href="", title="") @ Zalando Tech Blog

@@ -1,4 +1,1 @@
-aboutigor
-=========
-
-Source for aboutigor.com.
+About Igor Ramadas. Live site at http://aboutigor.com.
