@@ -12,7 +12,7 @@ if [ -s $LOG_FILE ]; then
   STAMP=`date -d @$MODIFY "+%Y%m%d-%H%M%S"`
   mv -f $LOG_FILE ${LOG_FILE}.${STAMP}
 fi
-echo "Node Version:"
+echo "Node version:"
 node -e 'console.log(process.versions);'
 
 echo "nohup supervisor $APP_FILE >$LOG_FILE 2>&1 &"
