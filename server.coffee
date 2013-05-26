@@ -2,7 +2,7 @@
 # -----------------------------------------------------------------------------
 
 # Required modules.
-expresser = require "../expresser.codeplex.com/expresser.coffee"
+expresser = require "expresser"
 expresser.init()
 
 # Routes.

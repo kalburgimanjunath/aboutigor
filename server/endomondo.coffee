@@ -107,7 +107,7 @@ class Endomondo
         minutes = result.duration.minutes()
 
         # Convert duration to readable time.
-        result.duration = hours + "h" + minutes + "m"
+        result.duration = hours + "h " + minutes + "m"
 
         # Delayed cache set.
         delayedCache = ->
