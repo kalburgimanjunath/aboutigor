@@ -1,0 +1,5 @@
+#!/bin/bash
+. ${OPENSHIFT_DATA_DIR}diy_env.sh
+
+kill `ps -ef | grep supervisor | grep -v grep | awk '{ print $2 }'` > /dev/null 2>&1
+exit 0
