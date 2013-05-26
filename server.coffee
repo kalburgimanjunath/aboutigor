@@ -1,8 +1,13 @@
 # MAIN SERVER
 # -----------------------------------------------------------------------------
 
-# Required modules.
+# Init expresser and settings.
 expresser = require "expresser"
+expresser.settings.General.appTitle = "Igor Ramadas"
+expresser.settings.Sockets.enabled = false
+expresser.settings.Logger.Logentries.token = process.env.LOGENTRIES_TOKEN
+
+# Init the app.
 expresser.init()
 
 # Routes.
