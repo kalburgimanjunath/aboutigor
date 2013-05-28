@@ -119,7 +119,8 @@ class Endomondo
     recentRunningStats: =>
         runningSport = (c) -> download url.parse(getUrl 0, recentMonths), c
         runningFitness = (c) -> download url.parse(getUrl 14, recentMonths), c
-        merger = (err, data) -> mergeResults data, "recent-running"
+        merger = (err, data) ->
+            mergeResults data, "recent-running"
 
         async.series [runningSport, runningFitness], merger
         expresser.logger.info "Endomondo.recentRunningStats"
@@ -128,7 +129,20 @@ class Endomondo
     recentCyclingStats: =>
         cyclingSport = (c) -> download url.parse(getUrl 2, recentMonths), c
         cyclingTransport = (c) -> download url.parse(getUrl 1, recentMonths), c
-        merger = (err, data) -> mergeResults data, "recent-cycling"
+        merger = (err, data) ->
+            # Add static / non-tracked cycling. Average of 7 times a week, 4.3km each, in 11min.
+            workouts = recentMonths * 4 * 7
+            distance = workouts * 4.3
+
+            duration = workouts * 11 * 60 * 1000
+            duration = moment("1970-01-01 " + duration).valueOf()
+            duration = moment.duration duration
+            hours = duration.hours()
+            minutes = duration.minutes()
+            duration = hours + "h " + minutes + "m"
+
+            data.push {workouts: workouts, distance: distance, duration: duration}
+            mergeResults data, "recent-cycling"
 
         async.series [cyclingSport, cyclingTransport], merger
         expresser.logger.info "Endomondo.recentCyclingStats"
