@@ -3,6 +3,7 @@
 
 # Require modules.
 cache = require "./cache.coffee"
+expresser = require "expresser"
 lodash = require "lodash"
 moment = require "moment"
 
@@ -20,7 +21,15 @@ exports.set = (app) ->
         recentTopArtists = lodash.pluck recentTopArtists, "name"
         recentTopArtists = recentTopArtists.join ", "
 
+        device = req.headers["user-agent"]
+
+        if device.indexOf("Windows Phone") > 0 or device.indexOf("iPhone") > 0 or device.indexOf("Android") > 0
+            mobile = true
+        else
+            mobile = false
+
         options =
+            mobile: mobile
             recentGitHub: recentGitHub
             recentTopArtists: recentTopArtists
             recentRunning: recentRunning

@@ -37,6 +37,8 @@ body
 a
     color linkColor
     text-decoration none
+
+// Hover links.
 a:hover
     color hoverLinkColor
 
@@ -54,9 +56,9 @@ h2
 // Bg picture.
 #bg
     background url(../images/bg.jpg) no-repeat
-    -moz-background-size 100%
-    -webkit-background-size 100%
-    background-size 100%
+    -moz-background-size cover
+    -webkit-background-size cover
+    background-size cover
     height 100%
     left 0
     position fixed
@@ -93,3 +95,21 @@ h2
 .links
     a
         margin-right 16px
+
+// MOBILE LAYOUT
+// ----------------------------------------------------------------------------
+
+body.mobile
+    font-size 24px
+
+    h1
+        font-size 70px
+
+    h2
+        font-size 30px
+
+    #bg
+        background-position center
+
+    #wrapper
+        width 100% !important
