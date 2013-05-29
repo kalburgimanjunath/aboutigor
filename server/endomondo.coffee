@@ -135,7 +135,6 @@ class Endomondo
             distance = workouts * 4.2
 
             duration = workouts * 11 * 60 * 1000
-            duration = moment("1970-01-01 " + duration).valueOf()
             duration = moment.duration duration
             hours = duration.hours()
             minutes = duration.minutes()
