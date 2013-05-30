@@ -33,9 +33,10 @@ class Endomondo
 
     # Helper to get the Endomondo URL.
     getUrl = (sportId, pastMonths) ->
-        from = moment().subtract("M", pastMonths).format "yyyyMMdd"
-        to = moment().format "yyyyMMdd"
-        return "#{baseUrl}#{sportId}&from=#{from}&to=#{to}"
+        from = moment().subtract("M", pastMonths).format "YYYYMMDD"
+        to = moment().format "YYYYMMDD"
+        resultUrl = "#{baseUrl}#{sportId}&from=#{from}&to=#{to}"
+        return resultUrl
 
     # Helper to download data from Endomondo.
     download = (urlInfo, callback) =>
@@ -95,16 +96,19 @@ class Endomondo
         for r in data
             result.workouts += parseInt r.workouts
             result.distance += parseInt r.distance
-            if r.duration.length is 7
-                result.duration += moment("1970-01-01 0" + r.duration).valueOf()
-            else
-                result.duration += moment("1970-01-01 " + r.duration).valueOf()
+            arr = r.duration.split ":"
 
+            if arr.length > 2
+                duration = {hours: parseInt(arr[0]), minutes: parseInt(arr[1]), seconds: parseInt(arr[2])}
+            else
+                duration = {minutes: parseInt(arr[0]), seconds: parseInt(arr[1])}
+
+            result.duration += moment.duration(duration).asMilliseconds()
 
         # Parse duration.
         result.duration = moment.duration result.duration
-        hours = result.duration.hours()
-        minutes = result.duration.minutes()
+        hours = Math.floor result.duration.asHours()
+        minutes = Math.floor result.duration.minutes()
 
         # Convert duration to readable time.
         result.duration = hours + "h " + minutes + "m"
@@ -133,11 +137,12 @@ class Endomondo
             # Add static / non-tracked cycling. Average of 9 times a week, 4.3km each, in 12min.
             workouts = recentMonths * 4 * 9
             distance = workouts * 4.3
-            duration = workouts * 12 * 60 * 1000
-            duration = moment.duration duration
+            distance = Math.round distance
+            duration = workouts * 12 * 60
+            duration = moment.duration duration, "s"
             hours = duration.hours()
             minutes = duration.minutes()
-            duration = hours + "h " + minutes + "m"
+            duration = hours + ":" + minutes + ":00"
 
             data.push {workouts: workouts, distance: distance, duration: duration}
             mergeResults data, "recent-cycling"
