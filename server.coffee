@@ -3,9 +3,8 @@
 
 # Init expresser and settings.
 expresser = require "expresser"
-expresser.settings.General.appTitle = "Igor Ramadas"
-expresser.settings.Sockets.enabled = false
-expresser.settings.Logger.Logentries.token = process.env.LOGENTRIES_TOKEN
+expresser.settings.general.appTitle = "Igor Ramadas"
+expresser.settings.sockets.enabled = false
 
 # Init the app.
 expresser.init()
