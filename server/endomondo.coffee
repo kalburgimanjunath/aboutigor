@@ -134,11 +134,21 @@ class Endomondo
         cyclingSport = (c) -> download url.parse(getUrl 2, recentMonths), c
         cyclingTransport = (c) -> download url.parse(getUrl 1, recentMonths), c
         merger = (err, data) ->
-            # Add static / non-tracked cycling. Average of 9 times a week, 4.3km each, in 12min.
-            workouts = recentMonths * 4 * 9
+
+            # Add non-tracked cycling to/from work. Average of 10 times a week, 4.3km each, in 13min.
+            weekDay = moment().day()
+            workouts = recentMonths * 4 * 10
             distance = workouts * 4.3
             distance = Math.round distance
-            duration = workouts * 12 * 60
+            duration = workouts * 13 * 60
+
+            # GOing to/from gym.
+            if weekDay is 1 or weekDay is 3 or weekDay is 5
+                workouts += 1
+                distance += 6
+                duration += 1200
+
+            # Calculate duration.
             duration = moment.duration duration, "s"
             hours = duration.hours()
             minutes = duration.minutes()
