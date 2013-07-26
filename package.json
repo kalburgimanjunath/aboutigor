@@ -1,9 +1,9 @@
 {
     "name": "aboutigor",
-    "version": "0.2.6",
+    "version": "0.2.7",
     "description": "About Igor Ramadas.",
     "homepage": "http://aboutigor.com",
-    "author": "Igor Ramadas <devv@devv.com>",
+    "author": "Igor Ramadas <igor@devv.com>",
     "license": "Apache License 2.0",
     "subdomain": "aboutigor",
     "main": "index",
@@ -20,7 +20,7 @@
     "dependencies": {
         "async": ">= 0.2.8",
         "coffee-script": ">= 1.6.2",
-        "expresser": ">= 0.8.6",
+        "expresser": ">= 0.8.9",
         "github": ">= 0.1.8",
         "lastfm": ">= 0.8.4",
         "lodash": ">= 1.1.1",
