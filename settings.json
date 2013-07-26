@@ -1,0 +1,10 @@
+{
+    "general": {
+        "debug": true
+    },
+    "logger": {
+        "local": {
+            "enabled": true
+        }
+    }
+}
