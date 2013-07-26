@@ -1,35 +1,35 @@
 {
-    "name": "aboutigor",
-    "version": "0.2.7",
-    "description": "About Igor Ramadas.",
-    "homepage": "http://aboutigor.com",
-    "author": "Igor Ramadas <igor@devv.com>",
-    "license": "Apache License 2.0",
-    "subdomain": "aboutigor",
-    "main": "index",
-    "domains": [
-        "aboutigor.com",
-        "www.aboutigor.com"
-    ],
-    "engines": {
-        "node": ">= 0.8.14"
-    },
-    "scripts": {
-        "start": "node index.js"
-    },
-    "dependencies": {
-        "async": ">= 0.2.8",
-        "coffee-script": ">= 1.6.2",
-        "expresser": ">= 0.8.9",
-        "github": ">= 0.1.8",
-        "lastfm": ">= 0.8.4",
-        "lodash": ">= 1.1.1",
-        "moment": ">= 2.0.0"
-    },
-    "keywords": [
-        "igor",
-        "ramadas",
-        "about igor",
-        "coloideans"
-    ]
+  "name": "OpenShift-Sample-App",
+  "version": "1.0.0",
+  "description": "OpenShift Sample Application",
+  "keywords": [
+    "OpenShift",
+    "Node.js",
+    "application",
+    "openshift"
+  ],
+  "author": {
+    "name": "OpenShift",
+    "email": "ramr@example.org",
+    "url":  "http://openshift.redhat.com/"
+  },
+  "homepage": "http://openshift.redhat.com/",
+  "repository": {
+    "type": "git",
+    "url": "https://gitub.com/openshift/crankcase"
+  },
+
+  "engines": {
+    "node": ">= 0.6.0",
+    "npm": ">= 1.0.0"
+  },
+
+  "dependencies": {
+    "express": "*"
+  },
+  "devDependencies": {},
+  "bundleDependencies": [],
+
+  "private": true,
+  "main": "server.js"
 }
