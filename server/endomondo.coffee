@@ -98,7 +98,9 @@ class Endomondo
             result.distance += parseInt r.distance
             arr = r.duration.split ":"
 
-            if arr.length > 2
+            if arr.length > 3
+                duration = {days: parseInt(arr[0]), hours: parseInt(arr[1]), minutes: parseInt(arr[2]), seconds: parseInt(arr[3])}
+            else if arr.length > 2
                 duration = {hours: parseInt(arr[0]), minutes: parseInt(arr[1]), seconds: parseInt(arr[2])}
             else
                 duration = {minutes: parseInt(arr[0]), seconds: parseInt(arr[1])}
@@ -137,23 +139,19 @@ class Endomondo
 
             # Add non-tracked cycling to/from work. Average of 10 times a week, 4.3km each, in 14min.
             weekDay = moment().day()
-            workouts = recentMonths * 4 * 10
+            workouts = recentMonths * 4 * 11
             distance = workouts * 4.3
             distance = Math.round distance
             duration = workouts * 14 * 60
 
-            # GOing to/from gym.
-            if weekDay is 1 or weekDay is 3 or weekDay is 5
-                workouts += 1
-                distance += 6
-                duration += 1200
-
             # Calculate duration.
-            duration = moment.duration duration, "s"
+            duration = moment.duration duration, "seconds"
+            days = duration.days()
             hours = duration.hours()
             minutes = duration.minutes()
-            duration = hours + ":" + minutes + ":00"
+            duration = days + ":" + hours + ":" + minutes + ":00"
 
+            # Push data to be merged.
             data.push {workouts: workouts, distance: distance, duration: duration}
             mergeResults data, "recent-cycling"
 
