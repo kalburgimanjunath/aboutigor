@@ -2,6 +2,12 @@
     "general": {
         "debug": true
     },
+    "firewall": {
+        "enabled": false
+    },
+    "sockets": {
+        "enabled": false
+    },
     "logger": {
         "local": {
             "enabled": true
