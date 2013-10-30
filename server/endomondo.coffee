@@ -85,8 +85,8 @@ class Endomondo
                     callback null, stats
                     expresser.logger.info "Endomondo.download", urlInfo.path, stats
 
+        # Pass error to callback.
         req.on "error", (err) ->
-            # Pass error to callback.
             callback err, null
             expresser.logger.error "Endomondo.download", urlInfo.path, err
 
@@ -124,38 +124,20 @@ class Endomondo
     # Get running stats from the last 3 months.
     recentRunningStats: =>
         runningSport = (c) -> download url.parse(getUrl 0, recentMonths), c
-        runningFitness = (c) -> download url.parse(getUrl 14, recentMonths), c
-        merger = (err, data) ->
-            mergeResults data, "recent-running"
+        stepCounter = (c) -> download url.parse(getUrl 50, recentMonths), c
+        merger = (err, data) -> mergeResults data, "recent-running"
 
-        async.series [runningSport, runningFitness], merger
+        async.series [runningSport, stepCounter], merger
         expresser.logger.info "Endomondo.recentRunningStats"
 
     # Get cycling stats from the last 3 months.
     recentCyclingStats: =>
         cyclingSport = (c) -> download url.parse(getUrl 2, recentMonths), c
         cyclingTransport = (c) -> download url.parse(getUrl 1, recentMonths), c
-        merger = (err, data) ->
+        cyclingIndoor = (c) -> download url.parse(getUrl 21, recentMonths), c
+        merger = (err, data) -> mergeResults data, "recent-cycling"
 
-            # Add non-tracked cycling to/from work. Average of 10 times a week, 4.3km each, in 14min.
-            weekDay = moment().day()
-            workouts = recentMonths * 4 * 11
-            distance = workouts * 4.3
-            distance = Math.round distance
-            duration = workouts * 14 * 60
-
-            # Calculate duration.
-            duration = moment.duration duration, "seconds"
-            days = duration.days()
-            hours = duration.hours()
-            minutes = duration.minutes()
-            duration = days + ":" + hours + ":" + minutes + ":00"
-
-            # Push data to be merged.
-            data.push {workouts: workouts, distance: distance, duration: duration}
-            mergeResults data, "recent-cycling"
-
-        async.series [cyclingSport, cyclingTransport], merger
+        async.series [cyclingSport, cyclingTransport, cyclingIndoor], merger
         expresser.logger.info "Endomondo.recentCyclingStats"
 
 

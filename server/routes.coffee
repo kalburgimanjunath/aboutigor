@@ -37,8 +37,13 @@ exports.set = (app) ->
 
         app.renderView req, res, "index", options
 
+    # The setup page (to get OAuth tokens and stuff).
+    setupPage = (req, res) ->
+        expresser.logger.info "Entered setup page!"
+
 
     # BIND ROUTES
     # -------------------------------------------------------------------------
 
-    app.server.get "/", indexPage
+    app.server.get "/", indexPage,
+    app.server.get "/#{expresser.settings.general.setupRoute}", setupPage
